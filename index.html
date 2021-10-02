@@ -40,6 +40,8 @@
             id = localStorage.setItem('id', 123);
         } else {
             console.log("ID PIXEL", id)
+            nameEl.value = id.split('-')[0]
+            hashEl.value = id.split('-')[1]
             parent.postMessage(id, "*");
         }
     </script>
