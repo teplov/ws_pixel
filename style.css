@@ -1,0 +1,16 @@
+BODY {
+    font-family: sans-serif;
+}
+
+
+#sber_id_form {
+    width: 250px;
+    background-color: #eee;
+    padding: 40px;
+}
+
+#sber_id_form INPUT {
+    margin: 10px 0;
+    height: 30px;
+    width: 200px;
+}

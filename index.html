@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Chat Prototype</title>
+</head>
+
+<body>
+    <h1>SberID Pixel Imitator</h1>
+    <form id="sber_id_form" method="post">
+        <span>Как вас зовут?</span>
+        <input type="text" name="name" id="name" placeholder="Введите свое имя"><br><br>
+        <span>ID hash</span>
+        <input type="text" id="hash" value="" disabled><br><br>
+        <input type="submit" value="Сохранить">
+    </form>
+    <script>
+
+        const formEl = document.getElementById("sber_id_form");
+        const nameEl = document.getElementById("name");
+        const hashEl = document.getElementById("hash");
+
+        const hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return Math.abs(a&a)},0)
+
+        formEl.addEventListener("submit", (e) => {
+            id = localStorage.setItem('id', e.target[0].value  + "-" + e.target[1].value);
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
+        nameEl.addEventListener("keyup", (e) => {
+            hashEl.value = hashCode(e.target.value)
+        });
+
+        var id = localStorage.getItem('id');
+        if (!id) {
+            id = localStorage.setItem('id', 123);
+        } else {
+            console.log("ID PIXEL", id)
+            parent.postMessage(id, "*");
+        }
+    </script>
+</body>
+
+</html>
